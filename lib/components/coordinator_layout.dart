@@ -63,12 +63,7 @@ class _CoordinatorLayoutState extends State<CoordinatorLayout> {
         },
         body: Container(
           child: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height +
-                      MediaQuery.of(context).padding.top),
-              child: widget.body,
-            ),
+            child: widget.body,
           ),
         ),
       ),

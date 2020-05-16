@@ -1,8 +1,10 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:dashboard_template/components/coordinator_layout.dart';
 import 'package:dashboard_template/components/header.dart';
+import 'package:dashboard_template/dummies/transaction.dart';
+import 'package:dashboard_template/views/categories.dart';
+import 'package:dashboard_template/views/items.dart';
 import 'package:dashboard_template/views/summary_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -33,20 +35,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ScrollController scrollController = ScrollController();
 
-  List<FlSpot> data1;
-  List<FlSpot> data2;
-
   double minHeight;
-  double maxHeight = 360;
+  double maxHeight;
   int maxValue = 1000;
   @override
   void initState() {
     super.initState();
-    Random random = Random();
-    data1 = List.generate(
-        7, (index) => FlSpot(index.toDouble(), random.nextInt(10) * 100.0));
-    data2 = List.generate(
-        7, (index) => FlSpot(index.toDouble(), random.nextInt(10) * 100.0));
   }
 
   @override
@@ -56,7 +50,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    minHeight = MediaQuery.of(context).padding.top + kToolbarHeight;
+    minHeight ??= MediaQuery.of(context).padding.top + kToolbarHeight;
+    maxHeight ??= 360;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
@@ -94,22 +89,46 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget buildSearchBox() {
+    double height = 48;
+    return Card(
+      elevation: 2,
+      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(height / 2)),
+      child: Container(
+        height: height,
+        padding: EdgeInsets.only(left: height / 2, right: height / 2 - 12),
+        child: TextFormField(
+          autofocus: false,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(top: 16, bottom: 14),
+            hintText: "What you wish for?",
+            suffixIcon: Icon(Icons.search),
+            border: InputBorder.none,
+          ),
+        ),
+      ),
+    );
+  }
+
   SingleChildScrollView buildMainContent(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         child: Column(
-            children: List.generate(
-                20,
-                (index) => InkWell(
-                      onTap: () {
-                        debugPrint("click");
-                      },
-                      child: Card(
-                        child: Container(
-                          height: 240,
-                        ),
-                      ),
-                    ))),
+          children: [
+            SizedBox(
+              height: 16,
+            ),
+            CategoriesList(),
+            buildSearchBox(),
+            SizedBox(
+              height: 24,
+            ),
+            ItemList(label: "New"),
+            ItemList(label: "Hot"),
+          ],
+        ),
       ),
     );
   }
@@ -174,9 +193,15 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            FloatingActionButton.extended(
-              onPressed: () {},
-              label: Text("Redeem"),
+            Container(
+              height: 40,
+              child: FloatingActionButton.extended(
+                heroTag: "view-transaction",
+                onPressed: () {
+                  Navigator.of(context).pushNamed("/transaction");
+                },
+                label: Text("View"),
+              ),
             )
           ],
         ),
@@ -209,8 +234,8 @@ class _HomePageState extends State<HomePage> {
                       flex: 1,
                       child: buildPointSummary(
                         title: "Received",
-                        value: 10000 + sum(data1),
-                        rate: data1.last.y - data2.last.y,
+                        value: 10000 + sum(totalReceived),
+                        rate: totalReceived.last.y - totalRedeem.last.y,
                         color: Colors.green,
                         icon: Icon(Icons.arrow_upward),
                       ),
@@ -253,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                     centerTitle: false,
                     title: Container(
                       child: Text(
-                        "Dashboard",
+                        offset == 1 ? "Home" : "Hi Michael,",
                         style: TextStyle(fontSize: 18 + 16 * (1 - offset)),
                       ),
                     ),
@@ -276,8 +301,8 @@ class _HomePageState extends State<HomePage> {
                     child: Opacity(
                       opacity: 1 - offset,
                       child: SummaryChart(
-                        data1: data1,
-                        data2: data2,
+                        data1: totalReceived,
+                        data2: totalRedeem,
                         maxValue: maxValue,
                       ),
                     ),
