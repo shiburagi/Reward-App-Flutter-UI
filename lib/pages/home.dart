@@ -76,6 +76,8 @@ class _HomePageState extends State<HomePage> {
               unselectedItemColor: Theme.of(context).disabledColor,
               selectedItemColor: Theme.of(context).accentColor,
               elevation: 0,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
               items: menus
                   .map((e) => BottomNavigationBarItem(
                         icon: Icon(e.icon),
