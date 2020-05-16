@@ -14,3 +14,16 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Preview
+
+![Alt Text](https://github.com/shiburagi/Reward-App-Flutter-UI/blob/master/preview/gif1.gif?raw=true)
+
+---
+
+<div>
+<img src="https://github.com/shiburagi/Reward-App-Flutter-UI/blob/master/preview/image1.png?raw=true?raw=true" width="320px"/>
+  
+<img src="https://github.com/shiburagi/Reward-App-Flutter-UI/blob/master/preview/image2.png?raw=true?raw=true" width="320px"/>
+
+</div>
