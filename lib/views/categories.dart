@@ -1,3 +1,4 @@
+import 'package:dashboard_template/helpers/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -40,13 +41,18 @@ class CategoriesList extends StatelessWidget {
                   height: 60,
                   width: 60,
                   child: IconTheme(
-                    data: Theme.of(context)
-                        .iconTheme
-                        .copyWith(color: Theme.of(context).primaryColor),
+                    data: Theme.of(context).iconTheme.copyWith(
+                            color: ColorHelper.keepOrWhite(
+                          Theme.of(context).primaryColor,
+                          Theme.of(context).cardColor,
+                          Theme.of(context).accentColor,
+                        )),
                     child: category.icon,
                   ),
                 ),
-                SizedBox(height: 4,),
+                SizedBox(
+                  height: 4,
+                ),
                 Text(
                   category.label,
                   style: Theme.of(context).textTheme.caption,

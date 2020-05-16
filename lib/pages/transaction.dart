@@ -1,5 +1,6 @@
 import 'package:dashboard_template/dummies/transaction.dart';
 import 'package:dashboard_template/entities/transaction.dart';
+import 'package:dashboard_template/helpers/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -13,6 +14,8 @@ class TransactionPage extends StatefulWidget {
 class _TransactionPageState extends State<TransactionPage> {
   @override
   Widget build(BuildContext context) {
+    Color appBarTextColor = ColorHelper.keepOrWhite(
+        Theme.of(context).primaryColor, Theme.of(context).cardColor);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).cardColor,
@@ -20,7 +23,7 @@ class _TransactionPageState extends State<TransactionPage> {
         iconTheme: Theme.of(context).iconTheme,
         title: Text(
           "Transaction History",
-          style: TextStyle(color: Theme.of(context).primaryColor),
+          style: TextStyle(color: appBarTextColor),
         ),
       ),
       body: buildListView(),
@@ -58,7 +61,9 @@ class _TransactionPageState extends State<TransactionPage> {
                     child: Text(
                       dateString,
                       style: Theme.of(context).textTheme.subtitle2.copyWith(
-                            color: Theme.of(context).primaryColor,
+                            color: ColorHelper.keepOrWhite(
+                                Theme.of(context).primaryColor,
+                                Theme.of(context).canvasColor),
                             fontWeight: FontWeight.bold,
                           ),
                     ),

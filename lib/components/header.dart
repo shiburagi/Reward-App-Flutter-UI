@@ -47,6 +47,6 @@ class SliverCollapseHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverCollapseHeaderDelegate oldDelegate) {
-    return false;
+    return true;
   }
 }
