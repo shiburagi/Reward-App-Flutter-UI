@@ -1,7 +1,5 @@
 # Reward-App-Flutter-UI
 
-A new Flutter project.
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.
@@ -20,10 +18,18 @@ samples, guidance on mobile development, and a full API reference.
 ![Alt Text](https://github.com/shiburagi/Reward-App-Flutter-UI/blob/master/preview/gif1.gif?raw=true)
 
 ---
-
+### Light Mode
 <div>
 <img src="https://github.com/shiburagi/Reward-App-Flutter-UI/blob/master/preview/image1.png?raw=true?raw=true" width="320px"/>
   
 <img src="https://github.com/shiburagi/Reward-App-Flutter-UI/blob/master/preview/image2.png?raw=true?raw=true" width="320px"/>
+
+</div>
+
+### Dark Mode
+<div>
+<img src="https://github.com/shiburagi/Reward-App-Flutter-UI/blob/master/preview/image1-dark.png?raw=true?raw=true" width="320px"/>
+  
+<img src="https://github.com/shiburagi/Reward-App-Flutter-UI/blob/master/preview/image2-dark.png?raw=true?raw=true" width="320px"/>
 
 </div>
